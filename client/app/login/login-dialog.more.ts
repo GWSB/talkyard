@@ -354,8 +354,8 @@ export const LoginDialogContent = createClassAndFactory({
         r.div({ id: 'dw-lgi-other-sites' },
           OpenAuthButton(makeOauthProps('icon-google', 'Google', true)),
           OpenAuthButton(makeOauthProps('icon-facebook', 'Facebook')),
-          OpenAuthButton(makeOauthProps('icon-twitter', 'Twitter')),
-          OpenAuthButton(makeOauthProps('icon-github-circled', 'GitHub')),
+          OpenAuthButton(makeOauthProps('icon-twitter', 'Twitter'))/*,
+          OpenAuthButton(makeOauthProps('icon-github-circled', 'GitHub'))*/,
           // OpenID doesn't work right now, skip for now:  icon-yahoo Yahoo!
           loginAsGuestButton),
 
