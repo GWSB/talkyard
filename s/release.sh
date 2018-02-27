@@ -104,7 +104,7 @@ cd $current_dir
 rm -f ./target/build-exit-status
 
 ./s/impl/release-as-root.sh $my_username $version_tag $@
-echo "\$?" | tee ./target/build-exit-code
+echo "\$?" | tee ./target/build-exit-status
 
 EOF_SUDO
 
@@ -121,7 +121,7 @@ if [ "$build_exit_status" != 'BUILD_OK' ]; then
   die_if_in_script
 fi
 
-echo 'Buid completed.'
+echo 'Build completed.'
 
 
 
@@ -133,21 +133,21 @@ echo 'Tag and publish to Docker? Press Enter to continue'
 read -s -p ''
 
 
-echo "Publishing to debiki/talkyard-*:$version_tag..."
+echo "Publishing to rickyt/talkyard-*:$version_tag..."
 
-sudo docker tag debiki/talkyard-app debiki/talkyard-app:$version_tag
-sudo docker tag debiki/talkyard-web debiki/talkyard-web:$version_tag
-sudo docker tag debiki/talkyard-rdb debiki/talkyard-rdb:$version_tag
-sudo docker tag debiki/talkyard-cache debiki/talkyard-cache:$version_tag
-sudo docker tag debiki/talkyard-search debiki/talkyard-search:$version_tag
-sudo docker tag debiki/talkyard-certgen debiki/talkyard-certgen:$version_tag
+sudo docker tag rickyt/talkyard-app rickyt/talkyard-app:$version_tag
+sudo docker tag rickyt/talkyard-web rickyt/talkyard-web:$version_tag
+sudo docker tag rickyt/talkyard-rdb rickyt/talkyard-rdb:$version_tag
+sudo docker tag rickyt/talkyard-cache rickyt/talkyard-cache:$version_tag
+sudo docker tag rickyt/talkyard-search rickyt/talkyard-search:$version_tag
+sudo docker tag rickyt/talkyard-certgen rickyt/talkyard-certgen:$version_tag
 
-sudo docker push debiki/talkyard-app:$version_tag
-sudo docker push debiki/talkyard-web:$version_tag
-sudo docker push debiki/talkyard-rdb:$version_tag
-sudo docker push debiki/talkyard-cache:$version_tag
-sudo docker push debiki/talkyard-search:$version_tag
-sudo docker push debiki/talkyard-certgen:$version_tag
+sudo docker push rickyt/talkyard-app:$version_tag
+sudo docker push rickyt/talkyard-web:$version_tag
+sudo docker push rickyt/talkyard-rdb:$version_tag
+sudo docker push rickyt/talkyard-cache:$version_tag
+sudo docker push rickyt/talkyard-search:$version_tag
+sudo docker push rickyt/talkyard-certgen:$version_tag
 
 
 # Bump version number
