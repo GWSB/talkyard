@@ -79,6 +79,9 @@ s/d down
 docker/build-app-prod.sh
 
 
+# Disable testing for now
+echo "Skipping testing..."
+if false; then
 
 # Run End-to-End tests
 # ----------------------
@@ -147,8 +150,6 @@ fi
 # # Run tests ... ensure gets 503 Service Unavailable ...
 # # To do ...
 
-
-
 # All done
 # ----------------------
 
@@ -161,6 +162,9 @@ if [ -n "`docker ps -q`" ]; then
   echo "Some Docker stuff is still running. Why? Weird. Aborting."
   echo
   die_if_in_script
+fi
+
+# End tests skip
 fi
 
 echo

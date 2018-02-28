@@ -135,12 +135,14 @@ read -s -p ''
 
 echo "Publishing to rickyt/talkyard-*:$version_tag..."
 
-sudo docker tag rickyt/talkyard-app rickyt/talkyard-app:$version_tag
-sudo docker tag rickyt/talkyard-web rickyt/talkyard-web:$version_tag
-sudo docker tag rickyt/talkyard-rdb rickyt/talkyard-rdb:$version_tag
-sudo docker tag rickyt/talkyard-cache rickyt/talkyard-cache:$version_tag
-sudo docker tag rickyt/talkyard-search rickyt/talkyard-search:$version_tag
-sudo docker tag rickyt/talkyard-certgen rickyt/talkyard-certgen:$version_tag
+sudo docker tag debiki/talkyard-app rickyt/talkyard-app:$version_tag
+sudo docker tag debiki/talkyard-web rickyt/talkyard-web:$version_tag
+sudo docker tag debiki/talkyard-rdb rickyt/talkyard-rdb:$version_tag
+sudo docker tag debiki/talkyard-cache rickyt/talkyard-cache:$version_tag
+sudo docker tag debiki/talkyard-search rickyt/talkyard-search:$version_tag
+sudo docker tag debiki/talkyard-certgen rickyt/talkyard-certgen:$version_tag
+
+sudo docker login --username=rickyt
 
 sudo docker push rickyt/talkyard-app:$version_tag
 sudo docker push rickyt/talkyard-web:$version_tag
