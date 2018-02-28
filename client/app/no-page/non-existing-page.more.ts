@@ -225,7 +225,7 @@ const CreateSomethingHere = createComponent({
 
     return (
       r.div({},
-        r.h1({}, "Configure your forum"),
+        r.h1({}, "Configure your community"),
         r.p({}, "You can change all this later; nothing is carved in stone."),
         /* Add this back later if there'll be Blog and Wiki options too [8GYK34]
         r.p({}, message),
@@ -250,7 +250,6 @@ export var CreateForumPanel = createComponent({
       useCategories: true,
       createSupportCategory: true,
       createIdeasCategory: true,
-      createOtherCategory: false,
       topicListStyle: TopicListLayout.ExcerptBelowTitle,
       nextChoice: 1,
     };
@@ -264,11 +263,7 @@ export var CreateForumPanel = createComponent({
 
   createForum: function() {
     Server.createForum(<any> { folder: '/', ...this.state }, (forumUrlPath: string) => {
-      // When the forum has just beeen created, there're some "About category ..." topics
-      // which people sometimes mistake for being actual categories. So show the categories
-      // list page instead, to avoid this confusion. (This shouldn't be a problem later on,
-      // when there're 'normal' topics too.)  [2PGHWQ0]
-      window.location.assign(forumUrlPath + RoutePathCategories);
+      window.location.assign(forumUrlPath);
     });
   },
 
@@ -292,13 +287,12 @@ export var CreateForumPanel = createComponent({
     let useCategoriesChoice;
     let createSupportCategoryChoice;
     let createIdeasCategoryChoice;
-    let createOtherCategoryChoice;
     let topicListStyleChoiceAndCreateButton;
 
     let nextButton;
 
-    forumNameChoice = Input({ type: 'text', label: "Forum name:",
-        placeholder: "Enter forum name here",
+    forumNameChoice = Input({ type: 'text', label: "Community name:",
+        placeholder: "Type a name here",
         ref: 'forumName', onChange: this.handleChange });
 
     if (nextChoice === 1 && !this.state.title.trim()) {
@@ -307,7 +301,7 @@ export var CreateForumPanel = createComponent({
 
     if (nextChoice >= 2) {
       useCategoriesChoice = Input({ type: 'checkbox',
-          label: "Use categories? Probably a good idea, unless the forum will be small. " +
+          label: "Use categories? Probably a good idea, unless the community will be small. " +
               "(Default: Yes)",
           checked: this.state.useCategories,
           onChange: (event) => this.setState({ useCategories: event.target.checked }) });
@@ -327,19 +321,12 @@ export var CreateForumPanel = createComponent({
             checked: this.state.createIdeasCategory,
             onChange: (event) => this.setState({ createIdeasCategory: event.target.checked }) });
       }
-
-      if (nextChoice >= 5) {
-        createOtherCategoryChoice = Input({ type: 'checkbox',
-            label: "Create an Other category? For topics that don't fit anywhere else. (Default: No)",
-            checked: this.state.createOtherCategory,
-            onChange: (event) => this.setState({ createOtherCategory: event.target.checked }) });
-      }
     }
     else {
-      nextChoice = 6;
+      nextChoice = 5;
     }
 
-    if (nextChoice >= 6) {
+    if (nextChoice >= 5) {
       const style = this.state.topicListStyle;
       let topicListPreviewImgSrc;
 
@@ -405,14 +392,14 @@ export var CreateForumPanel = createComponent({
                 help: "Like above, but full width (no table layout)." }),
               PrimaryButton({ className: 's_NP_CreateForumB',
                 onClick: this.createForum, disabled: !this.state.title.trim(),
-                id: 'e2eDoCreateForum' }, "Create Forum")),
+                id: 'e2eDoCreateForum' }, "Create Community")),
             r.div({ className: 's_NP_TopicsPreview' },
               r.p({}, r.i({}, "Topic list preview:")),
               r.img({ width: imgWidth, src: topicListPreviewImgSrc })));
     }
 
-    if (nextChoice <= 5) {
-      const last = nextChoice === 5 ? " (last)" : '';
+    if (nextChoice <= 4) {
+      const last = nextChoice === 4 ? " (last)" : '';
       nextButton = PrimaryButton({ onClick: () => this.setState({ nextChoice: nextChoice + 1 }),
           disabled: !thisChoiceDone, className: 'e_Next' }, "Next" + last);
     }
@@ -423,7 +410,6 @@ export var CreateForumPanel = createComponent({
         useCategoriesChoice,
         createSupportCategoryChoice,
         createIdeasCategoryChoice,
-        createOtherCategoryChoice,
         topicListStyleChoiceAndCreateButton,
         nextButton));
   }
