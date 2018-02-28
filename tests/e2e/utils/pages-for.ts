@@ -291,6 +291,8 @@ function pagesFor(browser) {
         browser.pause(200);
         api.waitAndClick('.e_Next');
         browser.pause(200);
+        api.waitAndClick('.e_Next');
+        browser.pause(200);
         api.waitAndClick('#e2eDoCreateForum');
         var actualTitle = browser.waitAndGetVisibleText('h1.dw-p-ttl');
         assert.equal(actualTitle, forumTitle);

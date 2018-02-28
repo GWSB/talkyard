@@ -1310,9 +1310,7 @@ function showNewPage(newPage: Page, newPublicCategories: Category[], newUsers: B
     if (page.pageRole === PageRole.Forum) clazz = ' es-forum';
     if (page.pageRole === PageRole.MindMap) clazz = ' dw-hz';
     if (page.pageRole) clazz = ' dw-vt';
-    clazz += (!page.pageRole ? '' : ' s_PT-' + page.pageRole);     // [5J7KTW2]
-    clazz += (!page.pageLayout ? '' : ' s_PL-' + page.pageLayout);
-    return clazz;
+    return clazz + (!page.pageRole ? '' : ' s_PT-' + page.pageRole);  // [5J7KTW2]
   }
   if (oldClassesStr || newClassesStr) {
     const regex = /[ ,]/;
